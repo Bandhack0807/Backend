@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const logger = require('morgan');
 const bodyparser = require('body-parser');
@@ -24,4 +25,4 @@ app.set('port', port);
 const server = http.createServer(app);
 server.listen(port);
 
-module.export = app;
+module.exports = app;

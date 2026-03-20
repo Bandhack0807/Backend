@@ -10,10 +10,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       nombre: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(100)
       },
       direccion: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(150)
       },
       password: {
         type: Sequelize.STRING(225)
@@ -22,10 +22,10 @@ module.exports = {
         type: Sequelize.STRING(120)
       },
       telefono: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING(15)
       },
       rol: {
-        type: Sequelize.ENUM('admi', 'cliente'),
+        type: Sequelize.ENUM('admin', 'cliente'),
         allowNull: false,
         defaultValue: 'cliente'
       },

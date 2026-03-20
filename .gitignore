@@ -17,4 +17,4 @@ build/
 .DS_Store
 Thumbs.db
 
-sequelize model:create --name tbc_usuarios --atributes nombre:string, direccion:string, password:string, emal:string, telefono:string, rol:string, fecha_registro:string
+sequelize model:create --name tbc_usuarios --attributes nombre:string,direccion:string,password:string,email:string,telefono:string,rol:string,fecha_registro:string

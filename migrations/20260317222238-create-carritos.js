@@ -1,34 +1,49 @@
 'use strict';
-
+/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('carritos', {
+    await queryInterface.createTable('tbb_carrito', {
       id: {
-        type: Sequelize.INTEGER,
+        allowNull: false,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
+        type: Sequelize.INTEGER
       },
-      id_usuario: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'usuarios',
-          key: 'id'
-        }
+      total: {
+        type: Sequelize.DECIMAL(10,2),
+        allowNull:false
+      },
+      estado: {
+        type: Sequelize.ENUM('Activo','Comprado','Cancelado'),
+        allowNull:false
       },
       fecha_creacion: {
         type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW
+        allowNull:false
       },
+      //--------------------------------------------------
+      id_usuario: {
+        type: Sequelize.INTEGER,
+        allowNull:false,
+        references: {
+          model: 'tbc_usuario',
+          key: 'id'
+        },
+        onUpdate: 'NO ACTION',
+        onDelete: 'NO ACTION'
+      },
+      //-------------------------------------------------
       createdAt: {
+        allowNull: false,
         type: Sequelize.DATE
       },
       updatedAt: {
+        allowNull: false,
         type: Sequelize.DATE
       }
     });
   },
-
-  async down(queryInterface) {
-    await queryInterface.dropTable('carritos');
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable('tbb_carrito');
   }
 };

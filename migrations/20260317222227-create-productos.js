@@ -1,45 +1,53 @@
 'use strict';
-
+/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('productos', {
+    await queryInterface.createTable('tbb_producto', {
       id: {
-        type: Sequelize.INTEGER,
+        allowNull: false,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
+        type: Sequelize.INTEGER
       },
       nombre: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: Sequelize.STRING(100),
+        allowNull:false
       },
       descripcion: {
-        type: Sequelize.TEXT
+        type: Sequelize.STRING(150),
+        allowNull:false
       },
       precio: {
         type: Sequelize.DECIMAL(10,2),
-        allowNull: false
+        allowNull:false
       },
       stock: {
-        type: Sequelize.INTEGER,
-        defaultValue: 0
+        type: Sequelize.DECIMAL(10,2),
+        allowNull:false
       },
+      //-------------------------------------------------
       id_categoria: {
         type: Sequelize.INTEGER,
+        allowNull:false,
         references: {
-          model: 'categorias',
+          model: 'tbc_categoria',
           key: 'id'
-        }
+        },
+        onUpdate: 'NO ACTION',
+        onDelete: 'NO ACTION'
       },
+      //-------------------------------------------------
       createdAt: {
+        allowNull: false,
         type: Sequelize.DATE
       },
       updatedAt: {
+        allowNull: false,
         type: Sequelize.DATE
       }
     });
   },
-
-  async down(queryInterface) {
-    await queryInterface.dropTable('productos');
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable('tbb_producto');
   }
 };

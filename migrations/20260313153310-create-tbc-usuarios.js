@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('tbc_usuarios', {
+    await queryInterface.createTable('tbc_usuario', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -10,27 +10,33 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       nombre: {
-        type: Sequelize.STRING(100)
+        type: Sequelize.STRING(100),
+        allowNull:false
       },
       direccion: {
-        type: Sequelize.STRING(150)
-      },
-      password: {
-        type: Sequelize.STRING(225)
-      },
-      email: {
-        type: Sequelize.STRING(120)
+        type: Sequelize.STRING(200),
+        allowNull:false
       },
       telefono: {
-        type: Sequelize.STRING(15)
+        type: Sequelize.STRING(15),
+        allowNull:false
+      },
+      email: {
+        type: Sequelize.STRING(120),
+        allowNull:false
+      },
+      password: {
+        type: Sequelize.STRING(255),
+        allowNull:false
       },
       rol: {
         type: Sequelize.ENUM('admin', 'cliente'),
-        allowNull: false,
-        defaultValue: 'cliente'
+        allowNull:false,
+        defaultValue: 'cliente'  
       },
       fecha_registro: {
-        type: Sequelize.STRING
+        type: Sequelize.DATE,
+        allowNull:false
       },
       createdAt: {
         allowNull: false,
@@ -43,6 +49,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('tbc_usuarios');
+    await queryInterface.dropTable('tbc_usuario');
   }
 };

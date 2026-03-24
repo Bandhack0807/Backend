@@ -1,45 +1,60 @@
 'use strict';
-
+/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('carrito_detalle', {
+    await queryInterface.createTable('tbd_carrito_detalle', {
       id: {
-        type: Sequelize.INTEGER,
+        allowNull: false,
         autoIncrement: true,
-        primaryKey: true
+        primaryKey: true,
+        type: Sequelize.INTEGER
       },
       id_carrito: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'carritos',
-          key: 'id'
-        }
+        type: Sequelize.INTEGER
       },
       id_producto: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'productos',
-          key: 'id'
-        }
-      },
-      cantidad: {
-        type: Sequelize.INTEGER,
-        allowNull: false
+        type: Sequelize.INTEGER
       },
       precio_unitario: {
-        type: Sequelize.DECIMAL(10,2),
-        allowNull: false
+        type: Sequelize.INTEGER
       },
+      cantidad: {
+        type: Sequelize.INTEGER
+      },
+      //--------------------------------------------------
+      id_carrito: {
+        type: Sequelize.INTEGER,
+        allowNull:false,
+        references: {
+          model: 'tbb_carrito',
+          key: 'id'
+        },
+        onUpdate: 'NO ACTION',
+        onDelete: 'NO ACTION'
+      },
+      //-------------------------------------------------
+      id_producto: {
+        type: Sequelize.INTEGER,
+        allowNull:false,
+        references: {
+          model: 'tbb_producto',
+          key: 'id'
+        },
+        onUpdate: 'NO ACTION',
+        onDelete: 'NO ACTION'
+      },
+      //-------------------------------------------------
       createdAt: {
+        allowNull: false,
         type: Sequelize.DATE
       },
       updatedAt: {
+        allowNull: false,
         type: Sequelize.DATE
       }
     });
   },
-
-  async down(queryInterface) {
-    await queryInterface.dropTable('carrito_detalle');
+  async down(queryInterface, Sequelize) {
+    await queryInterface.dropTable('tbd_carrito_detalle');
   }
 };
